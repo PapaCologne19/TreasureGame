@@ -22,7 +22,7 @@ if (isset($_POST['play'])) {
         $queryto = "SELECT * FROM book1 where id='$user' ";
         $resulto = mysqli_query($link, $queryto);
         while ($rowo = mysqli_fetch_array($resulto)) {
-            $player_name = strtoupper($rowo[9]);
+            $player_name = strtolower($rowo[9]);
             $_SESSION["player_name1"] = $player_name;
         }
     }
@@ -53,7 +53,7 @@ switch ($action) {
         $word = substr($word, 0, strlen($word) - 1);
 
         $_SESSION['word'] = trim($word);
-        $_SESSION['foundLetters'] = 's';
+        $_SESSION['foundLetters'] = '';
         $_SESSION['win'] = null;
 
         $level = 0;
@@ -76,10 +76,13 @@ switch ($action) {
 
         $_SESSION['image'] = 0;
 
+        $word = trim($word);
         $blankWord = '';
         for ($i = 0; $i < strlen($word); $i++) {
-            $blankWord .= (substr($word, $i, 1) != ' ' ? '<span class="guessed-letter">    </span>' : ' ');
+            // $blankWord .= '<span class="guessed-letter">    </span>';
+            $blankWord .= (substr($word, $i, 1) !== ' ' ? '<span class="guessed-letter">    </span>' : '<span>    </span>');
         }
+
 
         require 'start.php';
 
@@ -88,9 +91,9 @@ switch ($action) {
         $response = array();
 
         if ($_SESSION['win'] == null) {
-            $letter = strtoupper($_POST['letter']);
+            $letter = strtolower($_POST['letter']);
 
-            if (strpos(strtoupper($_SESSION['word']), $letter) === false) {
+            if (strpos(strtolower($_SESSION['word']), $letter) === false) {
                 $_SESSION['lives'] -= 1;
                 switch ($_SESSION['level']) {
                     case 0:
@@ -115,7 +118,6 @@ switch ($action) {
 
                 if ($_SESSION['lives'] == 0) {
                     $_SESSION['win'] = false;
-                    $response['word'] = 'The word was: <b>' . $_SESSION['word'] . '</b>';
 
                     $flips = $_SESSION['lives'];
                     $playerto = $_SESSION["player_name1"];
@@ -135,7 +137,7 @@ switch ($action) {
                     $found = false;
 
                     foreach ($foundLetters as $letter2) {
-                        if (strtoupper($letter) == strtoupper($letter2)) {
+                        if (strtolower($letter) == strtolower($letter2)) {
                             $found = true;
                             break;
                         }
@@ -165,24 +167,34 @@ switch ($action) {
                 $found = false;
 
                 foreach ($foundLetters as $letter2) {
-                    if (strtoupper($letter) == strtoupper($letter2)) {
+                    if (strtolower($letter) == strtolower($letter2)) {
                         $found = true;
                         break;
                     }
                 }
 
                 if ($found) {
-                    $guessedWord .= '<span class="guessed-letter" style="font-family: Arial, sans-serif; color: white;">  ' . $letter . '  </span>';
-                } elseif ($letter != ' ') {
-                    $guessedWord .= '<span class="guessed-letter">    </span>';
+                    $guessedWord .= '<span class="guessed-letter">  ' . $letter . '  </span>';
+                } elseif ($letter != '') {
+                    // $guessedWord .= '<span class="guessed-letter">    </span>';
+                    $guessedWord .= ($letter !== ' ' ? '<span class="guessed-letter">    </span>' : '<span>    </span>');
+
                 } else {
-                    $guessedWord .= '<span class="guessed-letter">    </span>';
+                    // $guessedWord .= '<span class="guessed-letter">    </span>';
+                    $guessedWord .= ($letter !== ' ' ? '<span class="guessed-letter">    </span>' : '<span>    </span>');
                 }
             }
+
+            // $blankWord .= (substr($word, $i, 1) !== ' ' ? '<span class="guessed-letter">    </span>' : ' ');
+
 
             $response['win'] = $_SESSION['win'];
             $response['lives'] = $_SESSION['lives'];
             $response['guessedWord'] = $guessedWord;
+            $response['letter'] = $_POST['letter'];
+            $response['word'] = $_SESSION['word'];
+
+
 
             echo json_encode($response);
             break;
