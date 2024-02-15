@@ -5,6 +5,9 @@ session_start();
 date_default_timezone_set('Asia/Hong_Kong');
 $datenow = date("m/d/Y h:i:s A");
 
+
+unset ($_SESSION['score']);
+
 if (isset($_POST['play'])) {
     $user = $_POST['user'];
     $_SESSION["data"] = $user;
@@ -48,11 +51,31 @@ switch ($action) {
         break;
 
     case 1: // Start
+
+//      $y=0;
+//         echo '<option></option> ';
+//         $querypro = "SELECT * FROM files where got != '0' ";
+//         $resultpro = mysqli_query($link, $querypro);
+//         while ($rowpro = mysqli_fetch_array($resultpro)) {
+         
+
+// $lines=$rowpro[1];
+// $x=$y++;
+//         }
+//     echo $x;
+//         echo $lines;
+// // echo strlen($lines) ;
+
+//              $word = substr($word, 0, strlen($lines) - 1);
+    
+    
         $lines = file('dictionary.txt');
         $word = $lines[rand(0, count($lines) - 1)];
         $word = substr($word, 0, strlen($word) - 1);
+        list($word, $hint) = explode('|', trim($word));
 
         $_SESSION['word'] = trim($word);
+        $_SESSION['hint'] = trim($hint);
         $_SESSION['foundLetters'] = '';
         $_SESSION['win'] = null;
 
@@ -79,7 +102,6 @@ switch ($action) {
         $word = trim($word);
         $blankWord = '';
         for ($i = 0; $i < strlen($word); $i++) {
-            // $blankWord .= '<span class="guessed-letter">    </span>';
             $blankWord .= (substr($word, $i, 1) !== ' ' ? '<span class="guessed-letter">    </span>' : '<span>    </span>');
         }
 
@@ -122,9 +144,13 @@ switch ($action) {
                     $flips = $_SESSION['lives'];
                     $playerto = $_SESSION["player_name1"];
 
+                          $_SESSION['score']=$flips;
+
                     $query1 = "INSERT INTO data(name, score, datenow)
                     VALUES ('$playerto','$flips','$datenow')";
                     mysqli_query($link, $query1);
+
+              
                 }
 
             } else {
@@ -155,8 +181,12 @@ switch ($action) {
                     $flips = $_SESSION['lives'];
                     $playerto = $_SESSION["player_name1"];
 
+
                     $query2 = "INSERT INTO data(name, score, datenow) VALUES ('$playerto', '$flips', '$datenow')";
                     mysqli_query($link, $query2);
+
+
+
                 }
             }
             $wordLetters = str_split($_SESSION['word']);
@@ -175,17 +205,14 @@ switch ($action) {
 
                 if ($found) {
                     $guessedWord .= '<span class="guessed-letter">  ' . $letter . '  </span>';
-                } elseif ($letter != '') {
-                    // $guessedWord .= '<span class="guessed-letter">    </span>';
+                } elseif ($letter != ' ') {
                     $guessedWord .= ($letter !== ' ' ? '<span class="guessed-letter">    </span>' : '<span>    </span>');
 
                 } else {
-                    // $guessedWord .= '<span class="guessed-letter">    </span>';
+                    $guessedWord .= ' ';
                     $guessedWord .= ($letter !== ' ' ? '<span class="guessed-letter">    </span>' : '<span>    </span>');
                 }
             }
-
-            // $blankWord .= (substr($word, $i, 1) !== ' ' ? '<span class="guessed-letter">    </span>' : ' ');
 
 
             $response['win'] = $_SESSION['win'];
@@ -193,7 +220,8 @@ switch ($action) {
             $response['guessedWord'] = $guessedWord;
             $response['letter'] = $_POST['letter'];
             $response['word'] = $_SESSION['word'];
-
+            $response['hint'] = $_SESSION['hint'];
+            $response['score'] = $_SESSION['lives'];
 
 
             echo json_encode($response);

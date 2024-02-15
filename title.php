@@ -19,7 +19,7 @@ if (isset($_POST['top10'])) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/trash/style.css">
   <link rel="stylesheet" type="text/css" href="css/title.css">
 
   <title>Treasure Quest</title>
@@ -34,7 +34,7 @@ if (isset($_POST['top10'])) {
     <form action="controller.php" method="POST">
       <input type="hidden" name="action" value="1" />
       <br><br><br><br><br><br><br>
-      <img src="images/logo1.png" id="logo" />
+      <img src="images/logo1.png" id="logo" >
 
       <div class="center">
         <div id="levels-div">
@@ -51,7 +51,7 @@ if (isset($_POST['top10'])) {
             <label style="color:Black;height:45px;width:60%;font-size:35"> Select Player </label>
           </h1>
           <br>
-          <select class="form-group select-user" name="user" placeholder="Select" onchange="blur_key()"> ';
+          <select class="form-group select-user" name="user" placeholder="Select" onchange="blur_key()" style="width:80%"> ';
             <?php
             echo '<option></option> ';
             $querypro = "SELECT * FROM book1 where played != '1' order by user ASC ";

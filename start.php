@@ -1,5 +1,6 @@
 <?php
 include("connect.php");
+
 date_default_timezone_set('Asia/Hong_Kong');
 $datenow = date("m/d/Y h:i:s A");
 ?>
@@ -41,13 +42,19 @@ $datenow = date("m/d/Y h:i:s A");
     <div class="row">
       <div class="col-md-12 image_logo_header">
         <div class="image_logo">
-          <img src="images/logo1.png" alt="" id="game_title">
+          <img src="images/logo1.png" alt="" id="game_title"/>
         </div>
       </div>
       <div class="col-md-12">
         <div class="image">
-          <img src="images/hangman/0.png" id="hangman" />
+          <img src="images/hangman/0.png" id="hangman" >
         </div>
+        <div id="lives-left-div" class="live-left">
+          Treasures left: <span id="lives-left">
+           <?= $_SESSION['lives'] ?> 
+          </span>
+        </div>
+
       </div>
 
       <div class="col-md-12">
@@ -56,12 +63,8 @@ $datenow = date("m/d/Y h:i:s A");
         </div>
       </div>
 
-      <div class="col-md-12 margin">
-        <div id="lives-left-div" class="live-left">
-          Treasures left: <span id="lives-left">
-            <?= $_SESSION['lives'] ?>
-          </span>
-        </div>
+      <div class="col-md-12">
+          <span id="hint"><?= $_SESSION['hint']?></span>
       </div>
 
       <div class="col-md-12">
@@ -81,21 +84,33 @@ $datenow = date("m/d/Y h:i:s A");
       </div>
     </div>
 
-    <div id="play-again-div" class="modal_display display-none word1 many1 centerme">
+    <div id="play-again-div" class="display-none word1 many1 centerme">
       <div class="">
-        <div id="the-word-was-div" class=""></div>
+        <!-- <div id="the-word-was-div" class=""></div> -->
       </div>
       <div class="title">
+  <br>
         <h2>THANK YOU FOR PLAYING!</h2>
       </div>
       <h3>
-        <?php echo 'The word was: <b>' . $_SESSION['word'] . '</b>'; ?>
+        <label>The word was:</label><br>
+        <?php echo '<b>' .$_SESSION['word'] . '</b>'; 
+ 
+        
+        
+        ?>
+<br>
+          Score: <span id="lives-left1">
+      
+          </span>
+    
+
       </h3>
 
       <center>
         <form action="" method="POST">
           <input type="submit" name="end" value="Okay" class="btn btn-primary">
-        </form>
+          </form>
       </center>
     </div>
 
