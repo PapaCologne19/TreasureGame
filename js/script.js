@@ -2,9 +2,7 @@ var boo_audio = new Audio("sounds/boo.mp3");
 var applause_audio = new Audio("sounds/applause.mp3");
 var blop_audio = new Audio("sounds/wrong.mp3");
 var correct_audio = new Audio("sounds/correct.mp3");
-
 var winOrLose = false;
-
 
 $(".letter").click(function () {
     $.ajax({
@@ -23,10 +21,15 @@ $(".letter").click(function () {
                     $("#hangman").attr("src", data.image);
                     $("#lives-left").text(data.lives);
                     $("#hint").text(data.hint);
-             
-                    
+
                     $("#guessed-word-div").html(data.guessedWord);
                     $(this).addClass("display-none");
+
+                    var givenWords = data.given_words; 
+                    givenWords.forEach(function (letter) {
+                        var letterElement = $(".letter:contains('" + letter + "')");
+                        letterElement.addClass("disabled");
+                    });
 
                     var selectedLetter = data.letter.toLowerCase();
                     var correctWord = data.word.toLowerCase();
