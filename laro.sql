@@ -1,23 +1,25 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11
--- http://www.phpmyadmin.net
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2024 at 03:17 AM
--- Server version: 5.6.24
--- PHP Version: 5.6.8
+-- Generation Time: Feb 28, 2024 at 05:48 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `treasure`
+-- Database: `laro`
 --
 
 -- --------------------------------------------------------
@@ -26,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `book1`
 --
 
-CREATE TABLE IF NOT EXISTS `book1` (
+CREATE TABLE `book1` (
   `id` int(11) NOT NULL,
   `PW` varchar(12) CHARACTER SET utf8 DEFAULT NULL,
   `IMMEDIATE_SUPERIOR` varchar(16) CHARACTER SET utf8 DEFAULT NULL,
@@ -39,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `book1` (
   `USER` varchar(25) CHARACTER SET utf8 DEFAULT NULL,
   `date_today` varchar(255) NOT NULL,
   `played` varchar(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `book1`
@@ -202,50 +204,23 @@ INSERT INTO `book1` (`id`, `PW`, `IMMEDIATE_SUPERIOR`, `POSITION`, `DEPARTMENT`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data`
+-- Table structure for table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `data` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `score` int(255) NOT NULL,
-  `datenow` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=376 DEFAULT CHARSET=latin1;
+  `score` varchar(255) NOT NULL,
+  `date_played` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `data`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `data` (`id`, `name`, `score`, `datenow`) VALUES
-(347, 'MOTEL, PALOMA LARIZA', 3, '06/24/2021 05:23:00 PM'),
-(348, 'RAMOS, MA CHRISTCEL', 0, '06/24/2021 05:23:16 PM'),
-(349, 'MOLAS, MA. TERESA', 1, '06/28/2021 07:58:37 AM'),
-(350, 'SANTOS, ANGELIQUE ANN', 1, '06/28/2021 07:58:49 AM'),
-(351, 'PALANA, ISMAEL', 0, '06/28/2021 07:59:46 AM'),
-(352, 'ODTUHAN, JEFFREY', 10, '06/28/2021 07:59:58 AM'),
-(353, 'PAMILARAN, ZENAIDA', 9, '06/28/2021 08:02:21 AM'),
-(354, 'PARMA, NASER', 0, '06/28/2021 08:03:19 AM'),
-(355, 'PAULINO, MARIA PAULA LUZ', 9, '06/28/2021 08:31:42 AM'),
-(356, 'PEREDA, MARLUDETH', 5, '06/28/2021 08:34:14 AM'),
-(357, 'PELLEJERA, HENRY JR.', 7, '06/28/2021 09:15:02 AM'),
-(358, 'SALAZAR, ANDREW', 2, '06/28/2021 12:10:07 PM'),
-(359, 'SANGRINES, ROGER', 3, '06/28/2021 12:11:09 PM'),
-(360, 'TEVAR, ANNALIZA', 5, '02/08/2024 09:38:10 AM'),
-(361, 'TIBAYAN, LAWRENCE', 0, '02/08/2024 09:48:44 AM'),
-(362, 'VARGAS, KAREN', 7, '02/08/2024 09:49:00 AM'),
-(363, 'VERDE, MA. FE', 0, '02/08/2024 09:50:09 AM'),
-(364, 'VELASCO, ADRIAN', 9, '02/08/2024 09:50:29 AM'),
-(365, 'VILLANUEVA, FERNANDO', 0, '02/08/2024 09:51:27 AM'),
-(366, 'VILLAVICENCIO, RODEO', 5, '02/08/2024 09:53:26 AM'),
-(367, 'ABAD, MARIVIC', 10, '02/08/2024 10:03:14 AM'),
-(368, 'ABAD, MARIVIC', 3, '02/08/2024 10:07:49 AM'),
-(369, 'ABAD, MARIVIC', 8, '02/08/2024 10:09:12 AM'),
-(370, 'ABAD, MARIVIC', 7, '02/08/2024 10:10:59 AM'),
-(371, 'ABAD, MARIVIC', 9, '02/08/2024 10:12:40 AM'),
-(372, 'ABAD, MARIVIC', 8, '02/08/2024 10:13:35 AM'),
-(373, 'ABAD, MARIVIC', 10, '02/08/2024 10:13:59 AM'),
-(374, 'ABAD, MARIVIC', 8, '02/08/2024 10:15:39 AM'),
-(375, 'ABAD, MARIVIC', 9, '02/08/2024 10:15:53 AM');
+INSERT INTO `user` (`id`, `name`, `score`, `date_played`) VALUES
+(1, 'ARELLANO, AIZA', '10', '2024-02-28 04:04:53'),
+(2, 'ANABE JR., ESMERALDO', '1', '2024-02-28 04:18:03');
 
 --
 -- Indexes for dumped tables
@@ -258,9 +233,9 @@ ALTER TABLE `book1`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `data`
+-- Indexes for table `user`
 --
-ALTER TABLE `data`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -271,12 +246,15 @@ ALTER TABLE `data`
 -- AUTO_INCREMENT for table `book1`
 --
 ALTER TABLE `book1`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=154;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+
 --
--- AUTO_INCREMENT for table `data`
+-- AUTO_INCREMENT for table `user`
 --
-ALTER TABLE `data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=376;
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

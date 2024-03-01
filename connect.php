@@ -1,12 +1,12 @@
-<?php
+<?php 
 
+$localhost = "localhost";
+$user = "root";
+$password = "";
+$database = "laro";
 
-$db_user = "root";
-$db_password = "";
-$db_host = "localhost";
-$db_database = "treasure";
+$connect = mysqli_connect($localhost, $user, $password, $database);
 
-$link = mysqli_connect($db_host,  $db_user,  $db_password,  $db_database) or die("Connection Failure");
-
-
-?>
+if(!$connect){
+    die('Connection Failed');
+}

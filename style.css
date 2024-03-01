@@ -1,0 +1,238 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-image: url(img/bg.jpg) !important;
+    background-repeat: no-repeat !important;
+    background-position: top !important;
+    background-size: cover;
+    height: 100vh;
+    /* background-image: url(img/bg.jpg);
+    background-size:  50% 50%;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    top: 0; */
+}
+
+.wrapper {
+    position: absolute;
+    width: 100%;
+    max-width: 37em;
+
+    padding: 7em 0em;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    border-radius: 1em;
+}
+
+#letter-container {
+    background-color: #ff9d0a;
+    border: 3px solid rgb(208, 211, 16);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+#user-input-section {
+    background-color: #ff9d0a;
+    border: 3px solid rgb(208, 211, 16);
+    border-radius: 10px;
+    /* padding: 0.1rem; */
+}
+
+.controls-container {
+    background-image: url(img/bg.jpg);
+    background-size: 100% 105%;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    top: 0;
+}
+
+#start {
+    font-size: 1.2em;
+    padding: 1em 3em;
+    border: none;
+    outline: none;
+    border-radius: 2em;
+    cursor: pointer;
+    background: #392613;
+    color: white;
+}
+
+#letter-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* margin-top: 2em; */
+}
+
+#letter-container button {
+    background-color: #ffffff;
+    background-color: #99c805 !important;
+    text-align: center !important;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2) !important;
+    border: 3px solid green;
+    color: #ffffff;
+    outline: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+    height: 3em;
+    width: 3em;
+}
+
+#letter-container .correct {
+    background-color: #008000;
+    color: #ffffff;
+    border: 2px solid #008000;
+}
+
+#letter-container .incorrect {
+    background-color: #8a8686;
+    color: #ffffff;
+    border: 2px solid #8a8686;
+}
+
+.hint-ref {
+    margin-bottom: -1em;
+    color: red;
+
+}
+
+.hint-ref span {
+    font-weight: 600;
+}
+
+
+#chanceCount {
+
+    margin: 10px;
+
+    /* margin: 1em 0;
+    position: absolute;
+    top: 1.62em;
+    right: 2em; */
+}
+
+#word {
+    font-weight: 600;
+    margin: 1em 0 2em 0;
+}
+
+#word span {
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.hide {
+    display: none;
+}
+
+#difficulty {
+    width: 40%;
+    background: #e2c799;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border: none;
+    border-radius: 20px;
+    padding: 1rem 2rem !important;
+    text-transform: uppercase;
+    font-size: 18px;
+    appearance: "\25BC";
+}
+
+.inputSpace {
+    width: 40px;
+    height: 44px;
+    background-color: #99c805 !important;
+    text-align: center !important;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2) !important;
+    font-size: 20px !important;
+    margin: 10px 0px !important;
+    padding: 0.5rem;
+    border-radius: 10px !important;
+    border: 3px solid green !important;
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.revealed {
+    color: gray;
+}
+
+.space {
+    background-color: #ff9d0a !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#result {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.card1 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 40%;
+    height: 40%;
+    position: absolute;
+    z-index: 2;
+
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 40%;
+    height: 40%;
+    z-index: 1;
+    background: #e2c799;
+    justify-content: center !important;
+    align-content: center !important;
+    text-align: center;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dont_show{
+    display: none;
+}
+
+#back{
+    padding: .5em 3em;
+    border: none;
+    outline: none;
+    border-radius: 2em;
+    cursor: pointer;
+    background: #392613;
+    color: white;
+    position: relative;
+}
+
+#result, 
+#resultl,
+#result1{
+    margin-top: 1rem;
+    text-align: center;
+}
